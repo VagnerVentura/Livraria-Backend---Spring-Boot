@@ -24,7 +24,9 @@ public class BookService {
 				bookDto.author(),
 				bookDto.editor(),
 				bookDto.barcode(),
-				bookDto.stock()
+				bookDto.stock(),
+				bookDto.nmrPaginas(),
+				bookDto.price()
 				);
 		
 		return bookRepository.save(book);

@@ -1,7 +1,5 @@
 package com.Api.Livraria.entities;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,8 +18,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_livros")
-public class Book {
+@Table(name = "tb_clients")
+public class Client{
 
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -30,18 +28,17 @@ public class Book {
 	@NotBlank(message = "Nome é obrigatório")
 	private String name;
 	
-	@NotBlank(message = "autor é obrigatório")
-	private String author;
-	
-	@NotBlank(message = "autor é obrigatório")
-	private String editor;
-	
-	@NotNull(message = "barcode é obrigatório")
+	@NotBlank(message = "cpf é obrigatório")
 	@Column(unique = true)
-	private String barcode;
+	private String cpf;
 	
-	private Integer stock;
-	private int nmrPaginas;
-    private BigDecimal price;
+	@NotBlank(message = "endereço é obrigatório")
+	private String address;
+	
+	@NotBlank(message = "email é obrigatório")
+	@Column(unique = true)
+	private String email;
+	
+	private String password;
 	
 }
