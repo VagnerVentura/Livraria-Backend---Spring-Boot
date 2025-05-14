@@ -1,0 +1,16 @@
+| Endpoint                  | Método | Descrição                      |
+| ------------------------- | ------ | ------------------------------ |
+| `/books`                  | GET    | Listar todos os livros         |
+| `/books/{id}`             | GET    | Buscar livro por ID            |
+| `/books`                  | POST   | Cadastrar novo livro           |
+| `/books/{id}`             | PUT    | Atualizar livro                |
+| `/books/{id}`             | DELETE | Excluir livro                  |
+| `/books/search?title=abc` | GET    | Buscar livro por título        |
+| `/books/category/{id}`    | GET    | Buscar livros por categoria    |
+| `/books/author/{id}`      | GET    | Buscar livros por autor        |
+| `/books/{id}/reviews`     | GET    | Ver avaliações de um livro     |
+| `/orders`                 | POST   | Criar pedido                   |
+| `/orders/{id}`            | GET    | Ver detalhes do pedido         |
+| `/orders/customer/{id}`   | GET    | Listar pedidos de um cliente   |
+| `/books/{id}/reviews`     | POST   | Adicionar avaliação a um livro |
+| `/reviews/{id}`           | GET    | Ver uma avaliação              |
