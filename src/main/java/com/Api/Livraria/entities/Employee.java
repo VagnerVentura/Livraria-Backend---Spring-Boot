@@ -34,6 +34,8 @@ public class Employee {
 	@Column(unique = true)
     private String email;
     
+	private String password;
+	
     private String role;
 	
 }
