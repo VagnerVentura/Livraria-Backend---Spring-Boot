@@ -48,23 +48,23 @@ public class EmployeeService {
 		newSale.setDate(LocalDateTime.now());
 		newSale.setClient(client);
 		
-		List<ItemSale> items = saleDto
-				.itemsSale()
-				.stream()
-				.map(item -> {
-					Book book = bookService.findById(item.bookId());
-					return new ItemSale(null,
-							book, 
-							newSale,
-							item.quantity());
-					//setar quantidade
-					//calcular preço
-				})
-				.collect(Collectors.toList());
-		
-		newSale.setItemsSale(items);
-		
-		
+//		List<ItemSale> items = saleDto
+//				.itemsSale()
+//				.stream()
+//				.map(item -> {
+////					Book book = bookService.findBookById(item.bookId());
+//					return new ItemSale(null,
+////							book, 
+//							newSale,
+//							item.quantity());
+//					//setar quantidade
+//					//calcular preço
+//				})
+//				.collect(Collectors.toList());
+//		
+//		newSale.setItemsSale(items);
+//		
+//		
 		return null;
 	}
 	

@@ -37,7 +37,7 @@ public class BookService {
 		Book book = new Book();
 		
 		Author author = authorService.findAuthorById(bookDto.getAuthorId());		
-		List<Category> categories = categoryService.findCategoryById(bookDto.getCategoriesId());		
+		List<Category> categories = categoryService.findCategoriesById(bookDto.getCategoriesId());		
 		Publisher publisher = publisherService.findPublisherById(bookDto.getPublisherId());		
 		
 		book.setTitle(bookDto.getTitle());
@@ -87,10 +87,10 @@ public class BookService {
 		 return response;
 	}
 
-	public Book findById(Long bookId) {
-	 var book = bookRepository.findById(bookId)
-			 .orElseThrow(() -> new RuntimeException("book not Found!"));		
-		return book;
+	public BookResponseDto findBookById(Long id){
+		Book entity = bookRepository.findById(id)
+				.orElseThrow( ()-> new RuntimeException("Book Not Found!"));
+		return toDto(entity);
 	}
 	
 	public void deleteBook(Book book) {
@@ -110,6 +110,49 @@ public class BookService {
 				.stream()
 				.map(Category::getName).toList());		
 		return dto;
+	}
+	
+	public List<BookResponseDto> findBookByTitle(String title) {
+		List<Book> entity = bookRepository.findByTitleContainingIgnoreCase(title);
+		
+		List<BookResponseDto> books = entity.stream()
+				.map(br-> {
+					BookResponseDto book = new BookResponseDto();
+					book.setTitle(br.getTitle());
+					book.setAuthorName(br.getAuthor().getName());
+					book.setPublisherName(br.getPublisher().getName());
+					book.setPrice(br.getPrice());
+					
+					List<String> names = br.getCategories()
+							.stream()
+							.map(n ->{
+								return n.getName();
+							}).collect(Collectors.toList());					
+					book.setCategoriesNames(names);
+					return book;
+				}).collect(Collectors.toList());
+		
+		return books;		
+	}
+	
+	public List<BookResponseDto> searchBooksByCategory(Long categoryId){
+		Category category = categoryService.findCategoryById(categoryId);
+		
+		List<BookResponseDto> books = category.getBooks()
+		.stream()
+		.map(book->{
+			BookResponseDto dtos = new BookResponseDto();
+			dtos.setTitle(book.getTitle());
+			dtos.setAuthorName(book.getAuthor().getName());
+			dtos.setPrice(book.getPrice());
+			dtos.setPublicationDate(book.getPublicationDate());
+			dtos.setPublisherName(book.getPublisher().getName());			
+			dtos.setCategoriesNames(book.getCategories()
+					.stream()
+					.map(Category::getName).collect(Collectors.toList()));			
+			return dtos;
+		}).collect(Collectors.toList());		
+		return books;
 	}
 	
 }

@@ -28,7 +28,12 @@ public class CategoryService {
 		return saved;
 	}
 	
-	public List<Category> findCategoryById(List<Long> id) {
+	public Category findCategoryById(Long categoryId) {
+		return categoryRepository.findById(categoryId)
+				.orElseThrow(()-> new RuntimeException("Category not Found!"));
+	}
+	
+	public List<Category> findCategoriesById(List<Long> id) {
 		List<Category> categories = categoryRepository.findAllById(id);
 		return categories;
 	}
