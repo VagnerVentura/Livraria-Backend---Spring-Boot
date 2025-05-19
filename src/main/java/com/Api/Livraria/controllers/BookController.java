@@ -63,6 +63,11 @@ public class BookController {
 		return ResponseEntity.ok().body(bookService.searchBooksByCategory(categoryId));
 	}
 	
+	@GetMapping("author/{authorId}")
+	public ResponseEntity<List<BookResponseDto>> searchBooksByAuthorId(@PathVariable Long authorId){
+		return ResponseEntity.ok().body(bookService.searchBooksByAuthorId(authorId));
+	}
+	
 	public void deleteBook(Book book) {
 		bookService.deleteBook(book);
 	}
